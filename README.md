@@ -25,7 +25,7 @@
 调用示例：<br/>
 `$exec=new ExecData();
  $exec->writeData($two);`;<br/>
-共5个参数,第一个参数必填，其他参数可选
+共5个参数,第一个参数必填，其他参数可选<br/>
 <pre>
  * @parem $data 数组数据
  * @parem $tit csv 文件tit,arr 或者 'aa,bb' 字符串类型,建议数组长度与数据每个二维数据长度一致
@@ -43,7 +43,7 @@
 调用示例：<br/>
 `$exec=new ExecData();
  $exec->fetchData("compress2.csv");`<br/>
-共5个参数,第一个参数必填，其他参数可选
+共5个参数,第一个参数必填，其他参数可选<br/>
 <pre>
  * @parem $filename 要读取的文件名
  * @parem bool 是否返回文件中的tit，默认false 不返回;
