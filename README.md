@@ -9,15 +9,15 @@
 - 读取压缩文件中某个指定的文件时（按照文件名读取时），传入的参数为 $this->config[ 'webChar'] (网页编码UTF-8)，写入压缩包时文件名为 $this->config[ 'fileNameChar'] (GBK)；读取压缩包文件（根据传入的文件名读取）数据时，文件名编码必须一致，否则读取不到数据
 
 ### 文件说明
-|--- datafile/          导出导入文件存放位置<br/>
-|--- log/               读取文件是错误日志存放位置<br/>
+|--- datafile/ &emsp;           导出导入文件存放位置<br/>
+|--- log/ &emsp;                读取文件是错误日志存放位置<br/>
 |--- src/<br/>
-    |--- dome.php       示例文件<br/>
-    |--- ExceData.php   执行读写操作调用类文件<br/>
-    |--- FetchFile.php  读取文件操作类<br/>
-    |--- Pub.php        读写操作基类<br/>
-    |--- WriteFile.php  数组写入文件（下载）类<br/>
-|--- test/       &emsp; 示例图片<br/>
+    |--- dome.php &emsp;        示例文件<br/>
+    |--- ExceData.php &ensp;    执行读写操作调用类文件<br/>
+    |--- FetchFile.php &ensp;   读取文件操作类<br/>
+    |--- Pub.php &emsp;         读写操作基类<br/>
+    |--- WriteFile.php &ensp;   数组写入文件（下载）类<br/>
+|--- test/ &emsp;&emsp;         示例图片<br/>
 
 ### 数组数据导出 CSV / ZIP 文件
 传入数组，如果限制每个文件的数据条数小于数组长度，自动生成压缩文件；<br/>
