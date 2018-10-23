@@ -10,14 +10,14 @@
 
 ### 文件说明
 |--- datafile/ &emsp;           导出导入文件存放位置<br/>
-|--- log/ &emsp;                读取文件是错误日志存放位置<br/>
+|--- log/ &emsp; &emsp;         读取文件是错误日志存放位置<br/>
 |--- src/<br/>
     |--- dome.php &emsp;        示例文件<br/>
     |--- ExceData.php &ensp;    执行读写操作调用类文件<br/>
     |--- FetchFile.php &ensp;   读取文件操作类<br/>
-    |--- Pub.php &emsp;         读写操作基类<br/>
+    |--- Pub.php &emsp;&emsp;   读写操作基类<br/>
     |--- WriteFile.php &ensp;   数组写入文件（下载）类<br/>
-|--- test/ &emsp;&emsp;         示例图片<br/>
+|--- test/ &emsp;&emsp;&emsp;   示例图片<br/>
 
 ### 数组数据导出 CSV / ZIP 文件
 传入数组，如果限制每个文件的数据条数小于数组长度，自动生成压缩文件；<br/>
@@ -49,5 +49,6 @@
      * int读取第几个文件的数据，默认0 读取所有文件，如果压缩文件中只有一个文件忽略此参数<br/>
      * 如果 $index=1,读取第一个文件;<br/>
      * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv,$fileway 参数必须为 false<br/>
-     * @parem bool 读取压缩包中文件的方式 默认索引,索引方式读取ture,文件名读取文件false ,此参数仅对压缩文件起作用<br/>
+     * @parem bool 读取压缩包中文件的方式 默认索引,索引方式读取ture,文件名读取文件false ,此参数仅对压缩文件起作用
+
 ![数据图片示例](test/test.png)
