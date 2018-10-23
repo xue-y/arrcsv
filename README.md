@@ -27,12 +27,12 @@
  $exec->writeData($two);`;<br/>
 共5个参数,第一个参数必填，其他参数可选
 <pre>
-     * @parem $data 数组数据<br/>
-     * @parem $tit csv 文件tit,arr 或者 'aa,bb' 字符串类型,建议数组长度与数据每个二维数据长度一致<br/>
-     * @parem $limit 每个文件数据条数<br/>
-     * @parem $filename 文件名，不加后缀，例如 aa,生成的文件是 aa.csv /aa.zip；默认文件名 WriteFile->deFileName()函数定义<br/>
-     * @parem $compr 单个文件是否压缩，默认false 不压缩
-     </pre>
+ * @parem $data 数组数据
+ * @parem $tit csv 文件tit,arr 或者 'aa,bb' 字符串类型,建议数组长度与数据每个二维数据长度一致
+ * @parem $limit 每个文件数据条数
+ * @parem $filename 文件名，不加后缀，例如 aa,生成的文件是 aa.csv /aa.zip；默认文件名 WriteFile->deFileName()函数定义
+ * @parem $compr 单个文件是否压缩，默认false 不压缩
+ </pre>
 
 ### CSV / ZIP 文件 还原 Array 数据
 读取CSV文件，返回数组;<br/>
@@ -45,14 +45,14 @@
  $exec->fetchData("compress2.csv");`<br/>
 共5个参数,第一个参数必填，其他参数可选
 <pre>
-     * @parem $filename 要读取的文件名<br/>
-     * @parem bool 是否返回文件中的tit，默认false 不返回;<br/>
-     * @parem bool 是否将 csv 文件中的tit 做为数组的 key ,默认false 返回索引数组<br/>
-     * @parem int/string     <br/>
-     *&ensp;int读取第几个文件的数据，默认0 读取所有文件，如果压缩文件中只有一个文件忽略此参数<br/>
-     *&ensp;如果 $index=1,读取第一个文件;<br/>
-     * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv,$fileway 参数必须为 false<br/>
-     * @parem bool 读取压缩包中文件的方式 默认索引,索引方式读取ture,文件名读取文件false ,此参数仅对压缩文件起作用
-     </pre>
+ * @parem $filename 要读取的文件名
+ * @parem bool 是否返回文件中的tit，默认false 不返回;
+ * @parem bool 是否将 csv 文件中的tit 做为数组的 key ,默认false 返回索引数组
+ * @parem int/string
+ * int读取第几个文件的数据，默认0 读取所有文件，如果压缩文件中只有一个文件忽略此参数
+ * 如果 $index=1,读取第一个文件;
+ * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv,$fileway 参数必须为 false
+ * @parem bool 读取压缩包中文件的方式 默认索引,索引方式读取ture,文件名读取文件false ,此参数仅对压缩文件起作用
+ </pre>
 
 ![数据图片示例](test/test.png)
