@@ -1,6 +1,6 @@
 ### 项目说明
-数组导出文件，文件还原数组（Array export file, file restore array）
-适用于导出导入会员、商品信息
+数组导出 CSV、ZIP 文件， CSV、ZIP 文件还原数组（Array export file, file restore array）
+适用于**导出导入会员、商品信息**
 
 ### 数据转码编码说明
 - 写入文件时，将文件名转换为 $this->config[ 'fileNameChar'] (GBK)，否则中文文件名乱码,数组数据编码为传入时原数据编码 $this->config[ 'webChar'] (网页编码UTF-8)
@@ -21,7 +21,7 @@
 
 ### 数组数据导出 CSV / ZIP 文件
 传入数组，如果限制每个文件的数据条数小于数组长度，自动生成压缩文件；<br/>
-如果限制每个文件的数据条数大于数组长度，根据参数设置是否压缩文件；       
+如果限制每个文件的数据条数大于数组长度，根据参数设置是否压缩文件；
 
 调用示例：<br/>
 `$exec=new ExecData();
