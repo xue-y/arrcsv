@@ -21,11 +21,13 @@
 
 ### 数组数据导出 CSV / ZIP 文件
 传入数组，如果限制每个文件的数据条数小于数组长度，自动生成压缩文件；<br/>
-如果限制每个文件的数据条数大于数组长度，根据参数设置是否压缩文件；<br/>
+如果限制每个文件的数据条数大于数组长度，根据参数设置是否压缩文件；       
+
 调用示例：<br/>
 `$exec=new ExecData();
- $exec->writeData($two);`;<br/>
-共5个参数,第一个参数必填，其他参数可选<br/>
+ $exec->writeData($two);`;
+
+共5个参数,第一个参数必填，其他参数可选
 <pre>
  * @parem $data 数组数据
  * @parem $tit csv 文件tit,arr 或者 'aa,bb' 字符串类型,建议数组长度与数据每个二维数据长度一致
@@ -39,11 +41,13 @@
 如果读取压缩包中所有文件如果没有警告日志，获取数组后会自动删除源文件<br/>
 读取文件压缩包，压缩包有多少个有内容的文件，就返回几个数组<br/>
 修改读取文件错误日志存放位置配置：<br/>
-    ExceData 文件 fetchData() 函数中 $f_config['logFile'] 设置成自定义即可<br/>
+    ExceData 文件 fetchData() 函数中 $f_config['logFile'] 设置成自定义即可
+
 调用示例：<br/>
 `$exec=new ExecData();
- $exec->fetchData("compress2.csv");`<br/>
-共5个参数,第一个参数必填，其他参数可选<br/>
+ $exec->fetchData("compress2.csv");`
+
+共5个参数,第一个参数必填，其他参数可选
 <pre>
  * @parem $filename 要读取的文件名
  * @parem bool 是否返回文件中的tit，默认false 不返回;
