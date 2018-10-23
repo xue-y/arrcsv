@@ -46,8 +46,8 @@
      * @parem bool 是否返回文件中的tit，默认false 不返回;<br/>
      * @parem bool 是否将 csv 文件中的tit 做为数组的 key ,默认false 返回索引数组<br/>
      * @parem int/string     <br/>
-     * int读取第几个文件的数据，默认0 读取所有文件，如果压缩文件中只有一个文件忽略此参数<br/>
-     * 如果 $index=1,读取第一个文件;<br/>
+     *&ensp;int读取第几个文件的数据，默认0 读取所有文件，如果压缩文件中只有一个文件忽略此参数<br/>
+     *&ensp;如果 $index=1,读取第一个文件;<br/>
      * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv,$fileway 参数必须为 false<br/>
      * @parem bool 读取压缩包中文件的方式 默认索引,索引方式读取ture,文件名读取文件false ,此参数仅对压缩文件起作用
 
