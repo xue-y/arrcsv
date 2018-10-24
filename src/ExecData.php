@@ -12,7 +12,7 @@ class ExecData {
         //'fileNameChar'  =>'GBK//IGNORE', // 文件名编码 支持中文 GBK//IGNORE
         'fileNameChar'  =>'GBK',
         'localTime'     => 'PRC', // 地区时间
-        'fileDir'        => '../datafile/',  // 文件存在目录，文件夹名不得为中文名，支持 . - / 英文 数组 下划线
+        'fileDir'        => '../datafile/',  // 文件存在目录，文件夹名不得为中文名，支持 . - / 英文 数字 下划线
     ];
 
     /* 构造函数 */
@@ -55,7 +55,7 @@ class ExecData {
     public function fetchData($filename,$tit=false,$key=false,$iden=0,$fileway=true)
     {
          $f_config=[
-            'logFile'        => '../log/error.txt',    // 日志文件名，文件夹名不得为中文，支持 . - / 英文 数组 下划线
+            'logFile'        => '../log/error.txt',    // 日志文件名，文件夹名不得为中文，支持 . - / 英文 数字 下划线
             'logTimeFormat' => 'Y:m:d H:i:s',  // 日志时间格式
             'importFileMax' => 5,           // 导入文件大小 5MB 5*1024*1024
          ];
