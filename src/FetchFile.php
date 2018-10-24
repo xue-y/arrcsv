@@ -369,11 +369,13 @@ class FetchFile extends Pub{
      * */
     private function outLog($filename='')
     {
+        // 如果出现错误
         if($this->log_error==true)
         {
             echo '读取文件时有错误，请查看日志信息';
         }else
         {
+            // 如果没有错误，删除源文件
             $this->unFile($filename);
         }
     }
