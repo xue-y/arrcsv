@@ -16,7 +16,7 @@ class FetchFile extends Pub{
     ];
 
     protected  $config=[
-        'isDelFile'=>true, // 如果读取的是所有文件是否删除源文件
+        'isDelFile'=>false, // 如果读取的是所有文件是否删除源文件
     ];
 
     private $dataTit;

@@ -1,10 +1,10 @@
 ### 项目说明
 数组导出 CSV、ZIP 文件， CSV、ZIP 文件还原数组（Array export file, file restore array）
 适用于**导入导出会员、商品信息**<br/>
-**注意：** 读取中文文件名文件、数据需要注意本地区域设置<br/>
+**注意：** 读取中文文件名文件、数据时需要注意本地区域设置<br/>
     写入文件数据是 UTF-8 ，设置 `FetchFile 类中 fetchFile() 函数中 setlocale(LC_ALL, 'US')`才可读取到数据；<br/>
     测试平台为WIN,其他平台未测试；<br/>
-    如果不能读取数据，请根据相应字符编码设置 <br/>
+    如果不能读取数据，请根据相应地区字符编码设置 <br/>
 
 ### 相比1.0.0 版本
 **修复**
@@ -55,7 +55,7 @@
 如果读取压缩包中所有文件如果没有错误，获取数组后会自动删除源文件；
 如果有错误，会输出提示信息，可以通过修改 FetchFIle 类中的 outLog() 函数自定义处理错误信息<br/>
 读取文件压缩包，压缩包有多少个有内容的文件，就返回几个数组 FetchFile 类中 fetchFile 函数 输出数组<br/>
-如果读取整个文件并且没有错误，是否删除源文件可以通过配置 FetchFile 类中 `$this->config["isDelFile"]=true` 设置，默认删除，值为`true`</br>
+如果读取整个文件并且没有错误，是否删除源文件可以通过配置 FetchFile 类中 `$this->config["isDelFile"]=false` 设置，默认不删除，值为`false`</br>
 修改读取文件时错误日志存放位置配置：<br/>
     ExceData 文件 fetchData() 函数中 `$f_config['logFile']` 设置成自定义即可
 
