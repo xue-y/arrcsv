@@ -1,16 +1,19 @@
 ### 项目说明
 数组导出 CSV、ZIP 文件， CSV、ZIP 文件还原数组（Array export file, file restore array）
 适用于**导入导出会员、商品信息**<br/>
-**注意**：PHP7.0.12-nts 版本中文命名的压缩包读取不到数据；如果压缩包中的中文文件，中文数据读取不到<br/>
-PHP5.5.38 版本不存在此问题，其他版本未测试
+**注意：**读取中文文件名文件、数据需要注意本地区域设置
+    写入文件数据是 UTF-8 ，设置 `FetchFile 类中 fetchFile() 函数中 setlocale(LC_ALL, 'US')`才可读取到数据；
+    测试平台为WIN,其他平台未测试；
+    如果不能读取数据，请根据相应字符编码设置
 
 ### 相比1.0.0 版本
 **修复**
-- PHP7 版本创建压缩包问题
-- 写入多卷文件 tit 不一致问题
-- PHP7 版本中文压缩包下载失败问题
-- 读取文件后是否删除源文件判断
-
+- 修复PHP7 版本创建压缩包`ZipArchive::close(): Invalid or uninitialized Zip object`问题
+- 修复写入多卷文件 tit 不一致问题
+- 修复PHP7 版本中文文件名压缩包下载失败问题
+- 修复PHP7.0.12-nts 版本中文命名的压缩包读取不到数据；如果压缩包中的中文文件，中文数据读取不到Bug
+**增加**
+- 增加读取文件后是否删除源文件判断
 
 ### 数据转码编码说明
 - PHP 文件编码与网页编码 `$this->config[ 'webChar']` 一致都为UTF-8
@@ -52,9 +55,9 @@ PHP5.5.38 版本不存在此问题，其他版本未测试
 如果读取压缩包中所有文件如果没有错误，获取数组后会自动删除源文件；
 如果有错误，会输出提示信息，可以通过修改 FetchFIle 类中的 outLog() 函数自定义处理错误信息<br/>
 读取文件压缩包，压缩包有多少个有内容的文件，就返回几个数组 FetchFile 类中 fetchFile 函数 输出数组<br/>
-如果读取整个文件并且没有错误，是否删除源文件可以通过配置 FetchFile 类中 `$this->config["isDelFile"]=false` 设置，默认删除，值为`true`</br>
+如果读取整个文件并且没有错误，是否删除源文件可以通过配置 FetchFile 类中 `$this->config["isDelFile"]=true` 设置，默认删除，值为`true`</br>
 修改读取文件时错误日志存放位置配置：<br/>
-    ExceData 文件 fetchData() 函数中 $f_config['logFile'] 设置成自定义即可
+    ExceData 文件 fetchData() 函数中 `$f_config['logFile']` 设置成自定义即可
 
 调用示例：<br/>
 `$exec=new ExecData();

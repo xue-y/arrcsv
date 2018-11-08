@@ -16,7 +16,7 @@ class FetchFile extends Pub{
     ];
 
     protected  $config=[
-        'isDelFile'=>false, // 如果读取的是所有文件是否删除源文件
+        'isDelFile'=>true, // 如果读取的是所有文件是否删除源文件
     ];
 
     private $dataTit;
@@ -84,7 +84,7 @@ class FetchFile extends Pub{
         //设置/获取内部字符编码
         mb_internal_encoding($this->config["webChar"]);
         // 设置区域 -- fgetcsv 读取中文数据读取不到
-        setlocale(LC_ALL, 'zh_CN');
+        setlocale(LC_ALL, 'US'); //setlocale( LC_ALL, "chs" )
 
         // 调用函数
         $fn_name=$file_ext.'Arr';
@@ -127,7 +127,7 @@ class FetchFile extends Pub{
             $fn=array_pop($fn_arr);
 
             $fn=mb_convert_encoding($fn,$this->config["webChar"],$this->config["fileNameChar"]);
-       //     $fn=iconv($this->config["fileNameChar"],$this->config["webChar"],$fn);
+            //$fn=iconv($this->config["fileNameChar"],$this->config["webChar"],$fn);
 
             $filename=empty($fn_arr)?$fn:implode('/',$fn_arr).'/'.$fn;
         }
@@ -218,6 +218,10 @@ class FetchFile extends Pub{
     {
         // 实例化 zip
         $zip=new ZipArchive();
+
+        // 中文文件名编码处理
+        $filename=$this->zipFileNameUnCode($filename);
+
         // 打开压缩文件
         if(!$zip->open($filename))
         {
@@ -262,7 +266,8 @@ class FetchFile extends Pub{
             // 文件名读取
             $all_arr=$this->zipFileOne($zip,$this->dataIden);
         }
-        $zip->close();
+
+        $zip->close(); // 关闭压缩文件
         // 多少个有内容的文件，就返回几个数组,如果都为空 没有文件或文件中没有数据
         if(!empty($all_arr))
         {
@@ -272,6 +277,9 @@ class FetchFile extends Pub{
     }
 
     /** 读取压缩文件夹中单个文件
+     * @parem $zip 压缩资源实例
+     * @parem $zip_file_name 压缩文件名
+     * @return 压缩文件数组数据
      * */
     private function zipFileOne($zip,$zip_file_name)
     {
@@ -387,7 +395,7 @@ class FetchFile extends Pub{
         }else if($this->fetchFileAll==true && $this->config["isDelFile"]==true)   // 如果读取所有文件  并设置删除源文件
         {
             // 如果没有错误，删除源文件
-            $this->unFile($filename);
+             $this->unFile($filename);
         }
     }
 

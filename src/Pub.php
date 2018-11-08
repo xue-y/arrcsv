@@ -33,7 +33,7 @@ class Pub {
         }
     }
 
-    /** 文件编码处理 如果数据与文件名 为英文数字，不需要转换编码
+    /** 文件编码处理 如果数据与文件名 为英文数字，不需要转换编码; 网页编码转为本地编码
      * @parem $filename 文件名 str or arr
      * @return filename  str or arr
      */
@@ -124,7 +124,7 @@ class Pub {
         error_log($info,3,$this->config["logFile"]);
     }
 
-    /** 压缩文件中转 gbk 中文名处理
+    /** 其他编码转为本地编码（gbk）
      * */
     protected function zipFileNameCode($filename)
     {
@@ -136,4 +136,15 @@ class Pub {
         return $filename;
     }
 
+    /**本地编码转为网页编码 zip解压
+     * */
+    protected function zipFileNameUnCode($filename)
+    {
+        $encode = mb_detect_encoding($filename, array("ASCII",'EUC-CN','GB2312','GBK','BIG5','UTF-8'));
+        if($encode!=$this->config['webChar'])
+        {
+            $filename=mb_convert_encoding($filename,$this->config['webChar'],$encode);
+        }
+        return $filename;
+    }
 } 

@@ -35,4 +35,4 @@ $exec=new ExecData();
 /*$exec->writeData($two,null,'中文aa',1000,true);*/
 
 // 从文件读取返回数组
-$exec->fetchData("2018_10_21_045256.csv");
+$exec->fetchData("中文.zip",true,true,'中文_1.csv',false);
