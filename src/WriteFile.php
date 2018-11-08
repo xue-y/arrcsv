@@ -16,7 +16,7 @@ class WriteFile extends Pub{
 
     // 写入文件 属性
     private $arrData;     //  数组数据
-    private $arrDataTit;  // 数据标题
+    private static $arrDataTit;  // 数据标题
     private $arrConut;    // 数组维度
     private $csvBr=PHP_EOL;  // csv 换行符
     private $arrC=0;   // 数组个数
@@ -49,7 +49,7 @@ class WriteFile extends Pub{
 
         // 初始数据
         $this->arrData=$arr;
-        $this->arrDataTit=$tit;  //如果为空取数组的下标[0]的kye ,如果传值使用数组下标[0]长度与 tit 数组长度一致
+        self::$arrDataTit=$tit;  //如果为空取数组的下标[0]的kye ,如果传值使用数组下标[0]长度与 tit 数组长度一致
 
         // 判断数组维度
         $this->isArrConut();
@@ -57,6 +57,12 @@ class WriteFile extends Pub{
         // 写入文件
         $file_name=$this->writeFileSub();
 
+        // 文件名编码处理 zip EUC-CN ; csv CP936
+        if(pathinfo($file_name,PATHINFO_EXTENSION)=='zip')
+        {
+            // 压缩文件处理中文编码
+            $file_name=$this->fileNameCode($file_name);
+        }
         // 判断文件是否创建成功
         $this->isFile($file_name);
     }
@@ -81,7 +87,7 @@ class WriteFile extends Pub{
         }else
         {
             // 如果使用中文命名文件名，需要转码，如果文件名为 数字或英文不需要转码
-            $this->config["fileName"]=$this->fileNameCode($this->config["fileName"]);
+            $this->config["fileName"]=$this->zipFileNameCode($this->config["fileName"]);
         }
     }
 
@@ -128,28 +134,22 @@ class WriteFile extends Pub{
             $data=$this->csvBr;
             $head=chr(0xEF).chr(0xBB).chr(0xBF); // 防止 excle 打开乱码
 
-            if(empty($this->arrDataTit))
+            if(empty(self::$arrDataTit))
             {
-                $tit=array_keys($file_data);
-            }else
-            {
-                $tit=$this->arrDataTit;
+                self::$arrDataTit=array_keys($file_data);
             }
-            $head.=$tit[0];
+            $head.=self::$arrDataTit[0];
             $data.=implode($this->csvBr,$file_data);
         }else
         {
             // 二维
-            if(empty($this->arrDataTit))
+            if(empty(self::$arrDataTit))
             {
-                $tit=array_keys($file_data[0]);
-            }else
-            {
-                $tit=$this->arrDataTit;
+                self::$arrDataTit=array_keys($file_data[0]);
             }
             $data='';
             $head=chr(0xEF).chr(0xBB).chr(0xBF); // 防止 excle 打开乱码
-            $head.=implode($this->csvLimiter,$tit);
+            $head.=implode($this->csvLimiter,self::$arrDataTit);
             foreach($file_data as $v)
             {
                 $data.=$this->csvBr;
@@ -171,7 +171,9 @@ class WriteFile extends Pub{
             // 创建压缩包
             $zip_file_name=$this->config['fileDir'].$this->config["fileName"].'.zip';
             $zip=new ZipArchive();
-            if(!$zip->open($zip_file_name,ZipArchive::OVERWRITE))
+            //php 7 以下 可以使用 overwrite
+            //php 7 使用 overwrite  ZipArchive::close(): Invalid or uninitialized Zip object in
+            if(!$zip->open($zip_file_name,ZipArchive::CREATE))
             {
                 exit("创建压缩包失败");
             }
@@ -194,7 +196,6 @@ class WriteFile extends Pub{
             $zip->close();
             return $zip_file_name;
         }
-
         // 取得单个文件数据
         $file_data=$this->arrCsv();
 
@@ -204,7 +205,7 @@ class WriteFile extends Pub{
             // 创建压缩包
             $zip_file_name=$this->config["fileDir"].$this->config["fileName"].'.zip';
             $zip=new ZipArchive();
-            if(!$zip->open($zip_file_name,ZipArchive::OVERWRITE))
+            if(!$zip->open($zip_file_name,ZipArchive::CREATE))
             {
                 exit("创建压缩包失败");
             }
@@ -214,7 +215,6 @@ class WriteFile extends Pub{
             ob_clean();
             return $zip_file_name;
         }
-
         // 如果不压缩--- 单个文件
         $new_file_name=$this->config["fileDir"].$this->config["fileName"].$this->deconfig["fileExt"];
         file_put_contents($new_file_name,$file_data);

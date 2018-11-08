@@ -44,6 +44,7 @@ class Pub {
             // 如果是多字节的字（中文） ，转换编码 gbk
             if(strlen($filename)!=mb_strlen($filename,$this->config['webChar']))
             {
+                //$this->config['webChar']  转为  $this->config['fileNameChar'] 编码字符
                 //   $filename=@iconv($this->config['webChar'],$this->config['fileNameChar'],$filename);
                 $filename=mb_convert_encoding($filename,$this->config['fileNameChar'],$this->config['webChar']);
             }
@@ -121,6 +122,18 @@ class Pub {
         $info=$type.$data.' [Message]：'.$message.$br;
 
         error_log($info,3,$this->config["logFile"]);
+    }
+
+    /** 压缩文件中转 gbk 中文名处理
+     * */
+    protected function zipFileNameCode($filename)
+    {
+        $encode = mb_detect_encoding($filename, array("ASCII",'EUC-CN','GB2312','GBK','BIG5','UTF-8'));
+        if($encode!="ASCII") // 如果不是数字或英文 中文名转码
+        {
+            $filename=mb_convert_encoding($filename,$this->config['fileNameChar'],$encode);
+        }
+        return $filename;
     }
 
 } 

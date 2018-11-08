@@ -1,7 +1,7 @@
 {
     "name": "xue-y/arrcsv",
     "description": "Array export file, file restore array",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "library",
     "license": "Apache-2.0",
     "authors": [

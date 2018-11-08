@@ -9,12 +9,13 @@ include '../vendor/autoload.php';
 
 $one = array ('a'=>'dsfsf','b'=>'中文','c'=>3,'d'=>4,'e'=>5);
 $two=array(
-    array("username"=>"汉字","password"=>"123"),
+    array("名称"=>"汉字","password"=>"123"),
     array("username"=>"test2","password"=>"456"),
     array("username"=>"test3","password"=>"789"),
     array("username"=>"test4","password"=>"111"),
     array("username"=>"test5","password"=>"222"),
     array("username"=>"test6","password"=>"222"),
+    array("username"=>"test7","password"=>"999"),
 );
 
 // 修改 读写类公共 默认 配置参数
@@ -31,7 +32,7 @@ $config=[
 $exec=new ExecData();
 
 // 导出文件
-$exec->writeData($two);
+/*$exec->writeData($two,null,'中文aa',1000,true);*/
 
 // 从文件读取返回数组
-/*$exec->fetchData("compress.csv");*/
+$exec->fetchData("2018_10_21_045256.csv");

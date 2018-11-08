@@ -15,16 +15,21 @@ class FetchFile extends Pub{
         'zip' => 'application/zip'
     ];
 
+    protected  $config=[
+        'isDelFile'=>false, // 如果读取的是所有文件是否删除源文件
+    ];
+
     private $dataTit;
     private $dataKey;
     private $dataIden;
     private $dataFetchType; // 读取文件的方式 索引还是文件名
     private $log_error=false;
-    private $fetchFileAll=false; // 如果读取的是所有文件后删除源文件
+    private $fetchFileAll=false; // 如果读取的是所有文件
 
     // 初始化类
     public function __construct($config=array())
     {
+        $config=array_merge($this->config,$config);
         parent:: __construct($config);
     }
 
@@ -46,6 +51,7 @@ class FetchFile extends Pub{
 
         // 拼接文件名称 文件编码统一
         $filename=$this->config['fileDir'].$this->fileNameCode($filename);
+
         // 判断文件是否存在
         if(!file_exists($filename))
         {
@@ -77,6 +83,8 @@ class FetchFile extends Pub{
 
         //设置/获取内部字符编码
         mb_internal_encoding($this->config["webChar"]);
+        // 设置区域 -- fgetcsv 读取中文数据读取不到
+        setlocale(LC_ALL, 'zh_CN');
 
         // 调用函数
         $fn_name=$file_ext.'Arr';
@@ -204,7 +212,7 @@ class FetchFile extends Pub{
     }
 
 
-    /** zip 文件嵌套文件夹(建议目录不要过深，只测试过一层，多层未测试) 读取数据 返回 arr
+    /** zip 文件嵌套文件夹(建议目录不要过深，只测试过二层，多层未测试) 读取数据 返回 arr
      * */
     private function zipArr($filename)
     {
@@ -215,7 +223,6 @@ class FetchFile extends Pub{
         {
             exit("打开压缩".$filename."文件失败");
         }
-
         $all_arr=[];
 
         // 文件读取方式  默认索引方式
@@ -224,7 +231,10 @@ class FetchFile extends Pub{
             $f_index=max(0,intval($this->dataIden));
             // 文件个数
             $file_num=$zip->numFiles;
-
+            if($file_num<1)
+            {
+                exit('压缩包中没有文件');
+            }
 
             if($file_num==1)  // 如果压缩包中只有一个文件
             {
@@ -252,7 +262,7 @@ class FetchFile extends Pub{
             // 文件名读取
             $all_arr=$this->zipFileOne($zip,$this->dataIden);
         }
-
+        $zip->close();
         // 多少个有内容的文件，就返回几个数组,如果都为空 没有文件或文件中没有数据
         if(!empty($all_arr))
         {
@@ -291,6 +301,7 @@ class FetchFile extends Pub{
 
         // 读取文件流 资源
         $fp = $zip->getStream($zip_file_name);
+
         if(!$fp)
         {
             ob_clean();// 清除缓冲区
@@ -373,7 +384,7 @@ class FetchFile extends Pub{
         if($this->log_error==true)
         {
             echo '读取文件时有错误，请查看日志信息';
-        }else
+        }else if($this->fetchFileAll==true && $this->config["isDelFile"]==true)   // 如果读取所有文件  并设置删除源文件
         {
             // 如果没有错误，删除源文件
             $this->unFile($filename);
