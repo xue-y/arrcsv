@@ -24,7 +24,7 @@ $config=[
     //'fileNameChar'  =>'GBK//IGNORE', // 文件名编码 支持中文 GBK//IGNORE
     'fileNameChar'  =>'GBK',
     'localTime'     => 'PRC', // 地区时间
-    'fileDir'        => '../datafile/',  // 文件存在目录，文件夹名不得为中 . / 英文 数组 下划线
+    'fileDir'        => '../datafile/',  // 文件存放/读取目录，文件夹名不得为中 . / 英文 数组 下划线
 ];
 
 //$config 参数可以不传
@@ -35,4 +35,4 @@ $exec=new ExecData();
 /*$exec->writeData($two,null,'中文aa',1000,true);*/
 
 // 从文件读取返回数组
-$exec->fetchData("中文.zip",true,true,'中文_1.csv',false);
+$exec->fetchData("中文.zip",true,true,'中文_1.csv');

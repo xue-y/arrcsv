@@ -9,7 +9,7 @@ class WriteFile extends Pub{
 
     // 不对用户 开放的配置信息
     protected  $deconfig=[
-        'minLimit'      => 1,       // 写入文件最少数据条数
+        'minLimit'      => 10,       // 写入文件最少数据条数
         'maxLimit'      => 300,         // 写入文件最多数据条数
         'fileExt'        =>'.csv',  // 写入文件格式、压缩包中文件的格式 不建议更改，读取写入是按照 csv 的数据格式操作的
     ];
@@ -67,23 +67,25 @@ class WriteFile extends Pub{
         $this->isFile($file_name);
     }
 
-    /** 默认文件名处理
+    /**
+     * 默认文件名处理
      * 用户不传文件名，或 iconv 处理后为空
-     * @return filename
+     * @return string filename
      * */
-    private function deFileName()
+    private function defaultFileName()
     {
         return date('Y_m_d_his',time());
     }
 
-    /** 判断用户是否传入文件名
-     * @return void文件名的编码处理后或默认文件名
+    /**
+     * 判断用户是否传入文件名
+     * @return 文件名编码处理后或默认文件名
      * */
     private function fileName()
     {
         if(empty($this->config["fileName"]))
         {
-            $this->config["fileName"]=$this->deFileName();
+            $this->config["fileName"]=$this->defaultFileName();
         }else
         {
             // 如果使用中文命名文件名，需要转码，如果文件名为 数字或英文不需要转码

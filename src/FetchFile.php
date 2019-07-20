@@ -34,23 +34,25 @@ class FetchFile extends Pub{
     }
 
 
-    /** 读取文件
-     * @parem $filename 要读取的文件名
-     * @parem bool 是否返回文件中的tit，默认false 不返回;
-     * @parem bool 是否将 csv 文件中的tit 做为数组的 key ,默认false 返回索引数组
-     * @parem int/string
+    /**
+     * 读取文件
+     * @parem string $filename 要读取的文件名
+     * @parem bool $tit 是否返回文件中的tit，默认false 不返回;
+     * @parem bool $key 是否将 csv 文件中的tit 做为数组的 key ,默认false 返回索引数组
+     * @parem int/string $iden
      * int读取第几个文件的数据，默认0 读取所有文件，如果压缩文件中只有一个文件忽略此参数
      * 如果 $index=1,读取第一个文件;
-     * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv,$fileway 必须为true
-     * @parem bool 读取压缩包中文件的方式 默认索引,索引方式读取ture,文件名读取文件false ,此参数仅对压缩文件起作用
-     * @return array返回文件数据
+     * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv
+     * @return array 返回文件数组数据
      * */
-    public function fetchFile($filename,$tit,$key,$iden,$fileway)
+    public function fetchFile($filename,$tit,$key,$iden)
     {
         $this->isFileDir();// 判断文件存在目录
 
         // 拼接文件名称 文件编码统一
         $filename=$this->config['fileDir'].$this->fileNameCode($filename);
+        // 如果不单独配置路径，传入时可以传入路径+文件名
+        //$filename=$this->fileNameCode($filename);
 
         // 判断文件是否存在
         if(!file_exists($filename))
@@ -74,8 +76,13 @@ class FetchFile extends Pub{
 
         if($file_ext=='zip')
         {
+            //判断文件读取方式
+            if(gettype($iden)=='string'){
+                $this->dataFetchType=false;
+            }else{
+                $this->dataFetchType=true;
+            }
             $this->dataIden=$iden;
-            $this->dataFetchType=$fileway;
         }else
         {
             $this->fetchFileAll=true;
