@@ -54,7 +54,7 @@
 读取CSV文件，返回数组;<br/>
 如果读取压缩包中所有文件如果没有错误，获取数组后会自动删除源文件；
 如果有错误，会输出提示信息，可以通过修改 `FetchFIle` 类中的 `outLog()` 函数自定义处理错误信息<br/>
-读取文件压缩包，压缩包有多少个有内容的文件，就返回几个数组 `FetchFile` 类中 `fetchFile` 函数 输出数组<br/>
+读取文件压缩包，压缩包有多少个有内容的文件，就返回几个数组 `FetchFile` 类中 `fetchFile()` 函数 输出数组<br/>
 如果读取整个文件并且没有错误，是否删除源文件可以通过配置 `FetchFile` 类中 `$this->config["isDelFile"]=false` 设置，默认不删除，值为`false`</br>
 修改读取文件时错误日志存放位置配置：<br/>
 `ExceData` 文件 `fetchData()` 函数中 `$f_config['logFile']` 设置成自定义即可
