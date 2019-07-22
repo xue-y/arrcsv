@@ -6,14 +6,10 @@
     测试平台为WIN,其他平台未测试；<br/>
     如果不能读取数据，请根据相应地区字符编码设置 <br/>
 
-### 相比1.0.0 版本
-**修复**
-- 修复PHP7 版本创建压缩包`ZipArchive::close(): Invalid or uninitialized Zip object`问题
-- 修复写入多卷文件 tit 不一致问题
-- 修复PHP7 版本中文文件名压缩包下载失败问题
-- 修复PHP7.0.12-nts 版本中文命名的压缩包读取不到数据；如果压缩包中的中文文件，中文数据读取不到Bug
-**增加**
-- 增加读取文件后是否删除源文件判断
+### 相比1.0.2 版本
+**调整**
+- 函数注释标准化
+
 
 ### 数据转码编码说明
 - PHP 文件编码与网页编码 `$this->config[ 'webChar']` 一致都为UTF-8
@@ -43,11 +39,11 @@
 
 共5个参数,第一个参数必填，其他参数可选
 <pre>
- * @parem $data 数组数据
- * @parem $tit csv 文件title, Array 或者 'aa,bb' 字符串类型,建议数组长度与数据每个二维数据长度一致
- * @parem $limit 每个文件数据条数
- * @parem $filename 文件名，不加后缀，例如 `aa`,生成的文件是 `aa.csv /aa.zip`；默认文件名 `WriteFile->defaultFileName()`函数定义
- * @parem $compr 单个文件是否压缩，默认 false 不压缩
+ * @param $data 数组数据
+ * @param $tit csv 文件title, Array 或者 'aa,bb' 字符串类型,建议数组长度与数据每个二维数据长度一致
+ * @param $limit 每个文件数据条数
+ * @param $filename 文件名，不加后缀，例如 `aa`,生成的文件是 `aa.csv /aa.zip`；默认文件名 `WriteFile->defaultFileName()`函数定义
+ * @param $compr 单个文件是否压缩，默认 false 不压缩
  </pre>
 
 ### CSV / ZIP 文件 还原 Array 数据
@@ -65,10 +61,10 @@
 
 共4个参数,第一个参数必填，其他参数可选
 <pre>
- * @parem $filename 要读取的文件名
- * @parem bool 是否返回文件中的tit，默认false 不返回;
- * @parem bool 是否将 csv 文件中的tit 做为数组的 key ,默认false 返回索引数组
- * @parem int/string
+ * @param $filename 要读取的文件名
+ * @param bool 是否返回文件中的tit，默认false 不返回;
+ * @param bool 是否将 csv 文件中的tit 做为数组的 key ,默认false 返回索引数组
+ * @param int/string
  * int读取第几个文件的数据，默认0 读取所有文件，如果压缩文件中只有一个文件忽略此参数
  * 如果 $index=1,读取第一个文件;
  * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv,$fileway 参数必须为 false

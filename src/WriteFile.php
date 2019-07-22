@@ -21,18 +21,20 @@ class WriteFile extends Pub{
     private $csvBr=PHP_EOL;  // csv 换行符
     private $arrC=0;   // 数组个数
 
-    // 初始化类
+    //TODO  初始化类
     public function __construct($config=array())
     {
         parent:: __construct($config);
         $this->config['fileDir']=$this->mkFileDir($this->config['fileDir']);
     }
 
-    /** arr 数组写入文件
-     * @parem $arr 写入的数据
-     * @parem $tit 文件tit
-     * @return 直接下载文件
-     * */
+    /**
+     * writeFile
+     * @todo 数组写入文件
+     * @param array $arr 写入的数据
+     * @param array|string $tit 文件title
+     * @return void 直接下载文件
+     */
     public function writeFile($arr,$tit)
     {
         $this->fileName();// 编码后的文件名或默认文件名
@@ -68,19 +70,20 @@ class WriteFile extends Pub{
     }
 
     /**
-     * 默认文件名处理
-     * 用户不传文件名，或 iconv 处理后为空
-     * @return string filename
-     * */
+     * defaultFileName
+     * @todo 默认文件名处理,用户不传文件名，或 iconv 处理后为空
+     * @return false|string
+     */
     private function defaultFileName()
     {
         return date('Y_m_d_his',time());
     }
 
     /**
-     * 判断用户是否传入文件名
-     * @return 文件名编码处理后或默认文件名
-     * */
+     * fileName
+     * @todo 判断用户是否传入文件名,设置文件名
+     * @return string 文件名编码处理后或默认文件名
+     */
     private function fileName()
     {
         if(empty($this->config["fileName"]))
@@ -93,15 +96,20 @@ class WriteFile extends Pub{
         }
     }
 
-    /* 每个文件数据条数 */
+    /**
+     * arrLimit
+     * @todo 设置、判断每个文件数据条数
+     */
     private function arrLimit()
     {
         $this->config['limit']=max($this->deconfig['minLimit'],$this->config['limit']);
         $this->config['limit']=min($this->deconfig['maxLimit'],$this->config['limit']);
     }
 
-    /** 判断数组维度 赋值数组总条数
-     * @return  void数组维度true一维false二维
+    /**
+     * isArrConut
+     * @todo 判断数组维度,设置数组总条数
+     * @return  void
      */
     private function isArrConut()
     {
@@ -115,9 +123,12 @@ class WriteFile extends Pub{
         }
     }
 
-    /** 数组转换csv格式
-     * @return 单个文件带格式的csv数据
-     * */
+    /**
+     * arrCsv
+     * @todo 数组转换csv格式
+     * @param array $arrdata
+     * @return string 单个文件带格式的csv数据
+     */
     private function arrCsv($arrdata=array())
     {
         if(empty($arrdata))
@@ -161,8 +172,10 @@ class WriteFile extends Pub{
         return   $head.$data;
     }
 
-    /** 数组数据写入文件
-     * @return  filename
+    /**
+     * writeFileSub
+     * @todo 数组数据写入文件
+     * @return string
      */
     private function writeFileSub()
     {
@@ -224,8 +237,12 @@ class WriteFile extends Pub{
         return $new_file_name;
     }
 
-    /** 文件写入完成判断文件是否正常并且存在直接下载
-     * */
+    /**
+     * isFile
+     * @todo 判断文件是否正常存在直接下载
+     * @param string $filename
+     * @return void 如果存在直接下载文件,不存在直接终止程序
+     */
     private function isFile($filename)
     {
         if(!file_exists($filename))
@@ -236,10 +253,12 @@ class WriteFile extends Pub{
         $this->exctDownFile($filename);
     }
 
-    /**判断用户是否下载完成或取消下载 删除本地文件
-     * @pream 需要下载的文件名 全路径
-     * @return void
-     * */
+    /**
+     * exctDownFile
+     * @todo 判断用户是否下载完成或取消下载 删除本地文件
+     * @param string $filename 需要下载的文件名,全路径
+     *  @return void
+     */
     private function exctDownFile($filename)
     {
         $fp=fopen($filename,"r");

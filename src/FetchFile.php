@@ -26,7 +26,7 @@ class FetchFile extends Pub{
     private $log_error=false;
     private $fetchFileAll=false; // 如果读取的是所有文件
 
-    // 初始化类
+    //TODO 初始化类
     public function __construct($config=array())
     {
         $config=array_merge($this->config,$config);
@@ -35,11 +35,12 @@ class FetchFile extends Pub{
 
 
     /**
-     * 读取文件
-     * @parem string $filename 要读取的文件名
-     * @parem bool $tit 是否返回文件中的tit，默认false 不返回;
-     * @parem bool $key 是否将 csv 文件中的tit 做为数组的 key ,默认false 返回索引数组
-     * @parem int/string $iden
+     * fetchFile
+     * @todo 读取文件
+     * @param string $filename 要读取的文件名
+     * @param bool $tit 是否返回文件中的tit，默认false 不返回;
+     * @param bool $key 是否将 csv 文件中的tit 做为数组的 key ,默认false 返回索引数组
+     * @param int/string $iden
      * int读取第几个文件的数据，默认0 读取所有文件，如果压缩文件中只有一个文件忽略此参数
      * 如果 $index=1,读取第一个文件;
      * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv
@@ -105,10 +106,12 @@ class FetchFile extends Pub{
         var_dump($arr);
     }
 
-    /** 判断目录是否存在
-     * @parem $dirname
-     * @reurn void 不是直接退出程序
-     * */
+    /**
+     * isFileDir
+     * @todo 判断目录是否存在
+     * @param $dirname
+     * @reurn void 不存在直接退出程序
+     */
     private function isFileDir()
     {
         $preg="/^[a-z0-9\.\/\-\_]+$/";
@@ -123,9 +126,12 @@ class FetchFile extends Pub{
         }
     }
 
-    /** 输出带路径的文件名：文件名转为与网页一样的格式
-     * 如果是英文或数字此步骤可以忽略
-     * */
+    /**
+     * outFileName
+     * @todo  输出带路径的文件名：文件名转为与网页一样的格式，如果是英文或数字此步骤可以忽略
+     * @param string $filename
+     * @return string
+     */
     private function outFileName($filename)
     {
         if(strlen($filename)!=mb_strlen($filename,$this->config["webChar"]))
@@ -141,10 +147,12 @@ class FetchFile extends Pub{
         return $filename;
     }
 
-    /** 导入文件 -- 判断文件格式
-     * @parem $filename
-     * @return file_ext
-     * */
+    /**
+     * fileType
+     * @todo 导入文件 -- 判断文件格式
+     * @param $filename
+     * @return string
+     */
     private function fileType($filename)
     {
         // 判断扩展
@@ -165,7 +173,7 @@ class FetchFile extends Pub{
     }
 
     /** 单个 csv 文件返回arr 数组
-     * @parem  $filename csv 文件名
+     * @param  $filename csv 文件名
      * @return csv文件data arr
      * */
     private function csvArr($filename)
@@ -218,9 +226,12 @@ class FetchFile extends Pub{
         return $this->returnArr($arr,$tit);
     }
 
-
-    /** zip 文件嵌套文件夹(建议目录不要过深，只测试过二层，多层未测试) 读取数据 返回 arr
-     * */
+    /**
+     * zipArr
+     * @todo 文件嵌套文件夹(建议目录不要过深，只测试过二层，多层未测试) 读取数据
+     * @param $filename
+     * @return array|压缩文件数组数据
+     */
     private function zipArr($filename)
     {
         // 实例化 zip
@@ -283,11 +294,13 @@ class FetchFile extends Pub{
         return $all_arr;
     }
 
-    /** 读取压缩文件夹中单个文件
-     * @parem $zip 压缩资源实例
-     * @parem $zip_file_name 压缩文件名
-     * @return 压缩文件数组数据
-     * */
+    /**
+     * zipFileOne
+     * @todo 读取压缩文件夹中单个文件
+     * @param mixed $zip 压缩资源实例
+     * @param string  $zip_file_name
+     * @return 组合的所有数据|void
+     */
     private function zipFileOne($zip,$zip_file_name)
     {
         // 如果文件名为中文名  ["crc"] 这个值有误
@@ -371,11 +384,13 @@ class FetchFile extends Pub{
        return $this->returnArr($arr,$tit);
     }
 
-    /** 返回从文件中读取的数据
-     * @parem $data
-     * @parem $tit
-     * @return 组合的所有数据
-     * */
+    /**
+     * returnArr
+     * @todo 返回从文件中读取的数据
+     * @param array $data
+     * @param array $tit
+     * @return array 组合的所有数据
+     */
     private function returnArr($data,$tit)
     {
         // 如果返回csv 文件中的tit ,返回数据 arr['data']数据，$arr['tit']标题
@@ -391,8 +406,12 @@ class FetchFile extends Pub{
         return $arr_all;
     }
 
-    /** 判断是否有错误
-     * */
+    /**
+     * outLog
+     * @todo 判断是否有错误
+     * @param string $filename
+     * @return mixed
+     */
     private function outLog($filename='')
     {
         // 如果出现错误
