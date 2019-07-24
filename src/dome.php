@@ -32,7 +32,8 @@ $config=[
 $exec=new ExecData();
 
 // 导出文件
-/*$exec->writeData($two,null,'中文aa',1000,true);*/
+$exec->writeData($two,null,'中文1aa',1000,true);
 
 // 从文件读取返回数组
-$exec->fetchData("中文.zip",true,true,'中文_1.csv');
+/*$data=$exec->fetchData("中文.zip",true,true,'中文_1.csv');
+print_r($data);*/

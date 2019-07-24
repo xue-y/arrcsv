@@ -16,14 +16,13 @@ class FetchFile extends Pub{
     ];
 
     protected  $config=[
-        'isDelFile'=>false, // 如果读取的是所有文件是否删除源文件
     ];
 
     private $dataTit;
     private $dataKey;
     private $dataIden;
     private $dataFetchType; // 读取文件的方式 索引还是文件名
-    private $log_error=false;
+    private $logError=false;
     private $fetchFileAll=false; // 如果读取的是所有文件
 
     //TODO 初始化类
@@ -32,7 +31,6 @@ class FetchFile extends Pub{
         $config=array_merge($this->config,$config);
         parent:: __construct($config);
     }
-
 
     /**
      * fetchFile
@@ -102,8 +100,7 @@ class FetchFile extends Pub{
         $this->outLog($filename);
 
         // 输出数组数据
-        echo "<pre>";
-        var_dump($arr);
+        return $arr;
     }
 
     /**
@@ -313,7 +310,7 @@ class FetchFile extends Pub{
             $file_info=$zip->statName($zip_file_name);
             if(empty($file_info))
             {
-                $this->log_error=true;
+                $this->logError=true;
                 // 输出前统一编码 utf8
                 $temp_file_name=$this->outFileName($zip_file_name);
                 $this->log("压缩包中不存在 $temp_file_name 文件 或 传入的文件名编码与压缩包中的文件编码不一致无法读取文件");
@@ -322,7 +319,7 @@ class FetchFile extends Pub{
         }
         if($file_info["size"]<1)
         {
-           $this->log_error=true;
+           $this->logError=true;
            $this->log($zip_file_name."没有数据");
            return;
         }
@@ -408,14 +405,14 @@ class FetchFile extends Pub{
 
     /**
      * outLog
-     * @todo 判断是否有错误
+     * @todo 判断是否有错误,如果没有错误判断是否删除源文件
      * @param string $filename
      * @return mixed
      */
     private function outLog($filename='')
     {
         // 如果出现错误
-        if($this->log_error==true)
+        if(($this->logError==true) && ($this->config['logOut']==true))
         {
             echo '读取文件时有错误，请查看日志信息';
         }else if($this->fetchFileAll==true && $this->config["isDelFile"]==true)   // 如果读取所有文件  并设置删除源文件

@@ -61,9 +61,11 @@ class ExecData {
             'logFile'        => '../log/error.txt',    // 日志文件名，文件夹名不得为中文，支持 . - / 英文 数字 下划线
             'logTimeFormat' => 'Y:m:d H:i:s',  // 日志时间格式
             'importFileMax' => 5,           // 导入文件大小 5MB 5*1024*1024
+            'isDelFile'=>false, // 如果读取的是所有文件是否删除源文件
+            'logOut'=>true  // 是否输出错误日志，默认输出
          ];
         $new_conf=array_merge($this->config,$f_config);
         $fetch_file=new FetchFile($new_conf);
-        $fetch_file->fetchFile($filename,$tit,$key,$iden);
+        return $fetch_file->fetchFile($filename,$tit,$key,$iden);
     }
 } 

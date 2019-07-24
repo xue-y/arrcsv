@@ -67,6 +67,9 @@ class WriteFile extends Pub{
         }
         // 判断文件是否创建成功
         $this->isFile($file_name);
+
+        // 下载文件
+        $this->exctDownFile($file_name);
     }
 
     /**
@@ -241,7 +244,7 @@ class WriteFile extends Pub{
      * isFile
      * @todo 判断文件是否正常存在直接下载
      * @param string $filename
-     * @return void 如果存在直接下载文件,不存在直接终止程序
+     * @return void
      */
     private function isFile($filename)
     {
@@ -249,8 +252,6 @@ class WriteFile extends Pub{
         {
             exit($filename.'文件创建失败');
         }
-        // 下载文件
-        $this->exctDownFile($filename);
     }
 
     /**
