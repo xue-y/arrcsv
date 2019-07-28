@@ -377,6 +377,7 @@ class FetchFile extends Pub{
                 $arr[]=$temp_arr;
             }
         }
+		fclose($fp); // 关闭文件
        // 返回数据
        return $this->returnArr($arr,$tit);
     }
