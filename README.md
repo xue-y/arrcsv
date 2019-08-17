@@ -1,6 +1,7 @@
 ### 项目说明
 数组导出 CSV、ZIP 文件， CSV、ZIP 文件还原数组（Array export file, file restore array）
-适用于**导入导出会员、商品信息**<br/>
+适用于**导入导出会员、商品信息** 
+所有配置项 `ExecData` 中配置   
 **注意：** 读取中文文件名文件、数据时需要注意本地区域设置<br/>
     写入文件数据是 UTF-8 ，设置 `FetchFile 类中 fetchFile() 函数中 setlocale(LC_ALL, 'US')`才可读取到数据；<br/>
     测试平台为WIN,其他平台未测试；<br/>

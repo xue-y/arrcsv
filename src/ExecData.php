@@ -12,7 +12,7 @@ class ExecData {
         //'fileNameChar'  =>'GBK//IGNORE', // 文件名编码 支持中文 GBK//IGNORE
         'fileNameChar'  =>'GBK',
         'localTime'     => 'PRC', // 地区时间
-        'fileDir'        => '../datafile/',  // 文件存在目录，文件夹名不得为中文名，支持 . - / 英文 数字 下划线
+        'fileDir'       => '../datafile/',  // 文件存在目录，文件夹名不得为中文名，支持 . - / 英文 数字 下划线
     ];
 
     //TODO  构造函数
@@ -35,8 +35,8 @@ class ExecData {
     {
           $w_config=[
             'limit'          => intval($limit),         // 写入数据条数
-            'fileName'       => $filename,  // 写入文件时的文件名，只要文件名，不需要后缀名
-            'compr'    => $compr, // 导出的如果是单个文件是否压缩  默认不压缩
+            'fileName'       => $filename,  			// 写入文件时的文件名，只要文件名，不需要后缀名
+            'compr'    		 => $compr, 				// 导出的如果是单个文件是否压缩  默认不压缩
           ];
           $new_conf=array_merge($this->config,$w_config);
           $write_file=new WriteFile($new_conf);
@@ -58,11 +58,11 @@ class ExecData {
     public function fetchData($filename,$tit=false,$key=false,$iden=0)
     {
          $f_config=[
-            'logFile'        => '../log/error.txt',    // 日志文件名，文件夹名不得为中文，支持 . - / 英文 数字 下划线
-            'logTimeFormat' => 'Y:m:d H:i:s',  // 日志时间格式
-            'importFileMax' => 5,           // 导入文件大小 5MB 5*1024*1024
-            'isDelFile'=>false, // 如果读取的是所有文件是否删除源文件
-            'logOut'=>true  // 是否输出错误日志，默认输出
+            'logFile'        => '../log/error.txt',  // 日志文件名，文件夹名不得为中文，支持 . - / 英文 数字 下划线
+            'logTimeFormat'  => 'Y:m:d H:i:s',       // 日志时间格式
+            'importFileMax'  => 5,           		 // 导入文件大小 5MB 5*1024*1024
+            'isDelFile'      =>false, 				 // 如果读取的是所有文件是否删除源文件
+            'logOut'         =>true  				 // 是否输出错误日志，默认输出
          ];
         $new_conf=array_merge($this->config,$f_config);
         $fetch_file=new FetchFile($new_conf);
