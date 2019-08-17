@@ -1,6 +1,6 @@
 ### 项目说明
 数组导出 CSV、ZIP 文件， CSV、ZIP 文件还原数组（Array export file, file restore array）
-适用于**导入导出会员、商品信息** 
+适用于**导入导出会员、商品信息**     
 所有配置项 `ExecData` 中配置   
 **注意：** 读取中文文件名文件、数据时需要注意本地区域设置<br/>
     写入文件数据是 UTF-8 ，设置 `FetchFile 类中 fetchFile() 函数中 setlocale(LC_ALL, 'US')`才可读取到数据；<br/>
@@ -23,7 +23,7 @@
 |--- datafile/ &emsp;           导出导入文件存放位置**必须有创建、写入、读取权限**<br/>
 |--- log/ &emsp; &emsp; &ensp;  读取文件是错误日志存放位置**必须有创建、写入权限**<br/>
 |--- src/<br/>
-    |--- dome.php &emsp;&ensp;  示例文件<br/>
+    |--- demo.php &emsp;&ensp;  示例文件<br/>
     |--- ExceData.php &ensp;    执行读写操作调用类文件<br/>
     |--- FetchFile.php &ensp;   读取文件操作类<br/>
     |--- Pub.php &emsp;&emsp;   读写操作基类<br/>
