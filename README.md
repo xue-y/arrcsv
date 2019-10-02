@@ -68,7 +68,6 @@
  * @param int/string
  * int读取第几个文件的数据，默认0 读取所有文件，如果压缩文件中只有一个文件忽略此参数
  * 如果 $index=1,读取第一个文件;
- * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv,$fileway 参数必须为 false
- </pre>
+ * string 要读取的文件名如果嵌套文件 请添加文件夹路径 例如 aa/aa.csv
 
 ![数据图片示例](test/test.png)

@@ -20,7 +20,7 @@ class FetchFile extends Pub{
 
     private $dataTit;
     private $dataKey;
-    private $dataIden;
+    private $dataIden;  // 要读取的文件名称或者索引
     private $dataFetchType; // 读取文件的方式 索引还是文件名
     private $logError=false;
     private $fetchFileAll=false; // 如果读取的是所有文件
